@@ -22,16 +22,17 @@ sleep 1
 screen -r query_$date -X stuff $"start transaction;\n"
 sleep 1
 screen -r query_$date -X stuff $"$query;\n"
-status=$(echo "$?")
 
-if [ $status != 0 ]
-then
-        screen -r query_$date -X stuff $"rollback;\n"       
-	echo "Something Went Wrong!"
-else
-        screen -r query_$date -X stuff $"commit;\n"
-        echo "Successfully Executed"
-fi
+#status=$(echo "$?")
+
+#if [ $status != 0 ]
+#then
+#        screen -r query_$date -X stuff $"rollback;\n"       
+#	echo "Something Went Wrong!"
+#else
+#        screen -r query_$date -X stuff $"commit;\n"
+#        echo "Successfully Executed"
+#fi
 
 screen -ls
 

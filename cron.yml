@@ -1,0 +1,18 @@
+
+---
+- hosts: all
+  gather_facts: 'no'
+  become: yes
+  remote_user: c2s
+  become_user: root
+           
+
+  tasks:
+  - name: Cron
+    environment: 
+     cron: "{{ cron }}"
+    shell: "/home/c2s/cronfind.sh"
+    register: shell_result
+
+  - debug:
+     var: shell_result.stdout_lines

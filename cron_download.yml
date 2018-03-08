@@ -6,14 +6,17 @@
   remote_user: c2s
   become_user: root
             
-  tasks:    
-  #         - name: Transfer
-  #        template: src=/home/vishnu/devops_ansible/script_hub/docker_restart.sh dest=/home/c2s/ansible_script.sh mode=0755
-
          
-         - name: Executing
-           script: /home/c2s/find.sh {{ cron }}
-           register: shell_result
+  # - name: Executing
+  #        shell: /home/c2s/cronfind.sh {{ cron }}
+  #        register: shell_result
 
-         - debug:
-                 var: shell_result.stdout_lines
+  tasks:
+          - name: Cron
+            environment:
+                    cron: "{{ cron }}"
+                    shell: "/home/c2s/cronfind.sh"
+                    register: shell_result
+
+                    #         - debug:
+                    # var: shell_result.stdout_lines
