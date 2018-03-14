@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: 'no'
+  become: yes
+  remote_user: c2s
+  become_user: root
+
+  tasks:
+          - name: mail
+            mail:
+            host: localhost
+            port: 25
+            to: Vishnu <vishnu,u@cloud2scale.com>
+            subject: Ansible-report
+            attach: /home/c2s/test.txt
+            body: 'System {{ ansible_hostname }} has been successfully provisioned.'
+            register: shell_result
+
+          - debug:
+                  var: shell_result.stdout_lines
+
+

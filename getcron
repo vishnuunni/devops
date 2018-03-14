@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "  ---------"
+echo -n "  Enter cron: "
+read crone
+cd /home/vishnu/devops_ansible
+echo > /home/vishnu/Desktop/Script_Hub/test/cronlog.log
+ansible-playbook -i test_host cron.yml --extra-vars "cron=$crone" > "/home/vishnu/Desktop/Script_Hub/test/cronlog.log"
+path=`cat "/home/vishnu/Desktop/Script_Hub/test/cronlog.log" | grep path | awk '{print $7}' | tr -d '"'`
+cat /home/vishnu/Desktop/Script_Hub/test/cronlog.log
+echo ""
+mv /home/vishnu/Desktop/cronlog/* /home/vishnu/Desktop/cronlogs_old
+scp -i /home/vishnu/c2s_sshkey c2s@13.229.239.74:$path /home/vishnu/Desktop/cronlog
+echo ""
+echo "File copied to /home/vishnu/Desktop/cronlog"
+echo ""
