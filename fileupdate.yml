@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: 'no'
+  become: yes
+  remote_user: c2s
+  become_user: root
+
+  tasks:
+          - replace:
+                  dest: /home/c2s/haproxy.cfg
+                  regexp: 'use_backend bosv2 if bosv2'
+                  replace: 'use_backend downtime if bosv2'
+                  backup: yes
+
+
