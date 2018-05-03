@@ -1,0 +1,12 @@
+#!/bin/bash
+docker kill test
+docker rm test
+docker run -d -t -i  --name test -v /home/vishnu/devops/script_hub:/opt/ 834e30a46d0a /bin/bash
+docker exec -it test sh -c 'sh /opt/echo.sh'
+#status=$(echo "$?")
+#if [ $status != 0 ]
+#then
+#	echo "error"
+#else
+#docker kill test
+#fi
